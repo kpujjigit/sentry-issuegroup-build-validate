@@ -36,10 +36,18 @@ function buildRule(e) {
 
 document.getElementById('builderForm').addEventListener('submit', buildRule);
 
+document.getElementById('rulesInput').addEventListener('input', runValidation);
+
 const allowedMatchers = new Set([
-  'error.type','type','error.value','value','message','logger','level',
-  'stack.abs_path','path','stack.module','module','stack.function','function',
-  'stack.package','package','family','app'
+  'error.type', 'type',
+  'error.value', 'value',
+  'message', 'logger', 'level',
+  'tags.tag',
+  'stack.abs_path', 'path',
+  'stack.module', 'module',
+  'stack.function', 'function',
+  'stack.package', 'package',
+  'family', 'app'
 ]);
 
 function validateRule(line) {
@@ -52,8 +60,16 @@ function validateRule(line) {
   const tokens = left.split(/\s+/);
   for(const token of tokens) {
     const [m,exp] = token.split(':');
-    if(!exp) { result.status='invalid'; result.message=`Missing expression for ${m}`; return result; }
-    if(!allowedMatchers.has(m.split('.')[0]+'-'+m.split('.')[1])){}
+    if(!exp) {
+      result.status='invalid';
+      result.message = `Missing expression for ${m}`;
+      return result;
+    }
+    if(!allowedMatchers.has(m)) {
+      result.status = 'invalid';
+      result.message = `Unknown matcher ${m}`;
+      return result;
+    }
   }
   if(!right) { result.status='invalid'; result.message='Missing fingerprint'; return result; }
   // Improvement: suggest default variable if not using it
