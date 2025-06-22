@@ -20,9 +20,8 @@ Sentry.init({
 
 app.use(express.static(path.join(__dirname, '.')));
 
-app.get('/config.js', (req, res) => {
-  res.type('application/javascript').send(`window.SENTRY_ORG='${process.env.SENTRY_ORG}';\nwindow.SENTRY_PROJECT='${process.env.SENTRY_PROJECT}';\nwindow.SENTRY_DSN='${process.env.SENTRY_DSN}';`);
-});
+const configHandler = require('./api/config');
+app.get('/api/config.js', configHandler);
 
 app.use(Sentry.expressErrorHandler());
 
