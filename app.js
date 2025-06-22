@@ -118,3 +118,17 @@ function runValidation() {
   span.finish();
 }
 
+// theme toggle
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.body.dataset.theme = savedTheme;
+const themeToggleBtn = document.getElementById('themeToggle');
+if (themeToggleBtn) {
+  themeToggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  themeToggleBtn.addEventListener('click', () => {
+    const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.body.dataset.theme = newTheme;
+    themeToggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('theme', newTheme);
+  });
+}
+
