@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script src="https://browser.sentry-cdn.com/7.113.0/bundle.tracing.replay.min.js" crossorigin="anonymous"></script>
+<script src="config.js"></script>
 <h1>Sentry Grouping Rule Builder & Validator</h1>
 <div id="builder">
 <h2>Rule Builder</h2>
@@ -28,6 +30,6 @@
 <textarea id="rulesInput" rows="10" cols="80" placeholder="Paste fingerprint rules here, one per line"></textarea>
 <pre id="validationOutput"></pre>
 </div>
-<script src="app.js"></script>
+<script src="app.js" defer></script>
 </body>
 </html>

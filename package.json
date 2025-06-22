@@ -1,0 +1,20 @@
+{
+  "name": "sentry-issuegroup-build-validate",
+  "version": "1.0.0",
+  "description": "This repository contains a small static web application that helps you create and verify [Sentry](https://sentry.io) issue grouping rules. It provides two main tools:",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@sentry/node": "^9.30.0",
+    "@sentry/profiling-node": "^9.30.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  }
+}
