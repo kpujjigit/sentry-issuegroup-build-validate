@@ -1,0 +1,8 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+h1 { text-align: center; }
+#builder, #validator { margin-bottom: 40px; }
+.matcherRow { margin-bottom: 5px; }
+.valid { background-color: #e0ffe0; }
+.invalid { background-color: #ffe0e0; }
+.improve { background-color: #fff5cc; }
+pre { background: #f6f8fa; padding: 10px; }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sentry Grouping Rule Builder & Validator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Sentry Grouping Rule Builder & Validator</h1>
+<div id="builder">
+<h2>Rule Builder</h2>
+<form id="builderForm">
+<div id="matchers"></div>
+<button type="button" id="addMatcher">Add Matcher</button>
+<div>
+<label>Rule Name/Type <input type="text" id="ruleName"></label>
+</div>
+<div>
+<label>Fingerprint / Variables <input type="text" id="fingerprint"></label>
+</div>
+<button type="submit">Build Rule</button>
+</form>
+<pre id="builtRule"></pre>
+</div>
+<hr>
+<div id="validator">
+<h2>Rule Validator</h2>
+<textarea id="rulesInput" rows="10" cols="80" placeholder="Paste fingerprint rules here, one per line"></textarea>
+<pre id="validationOutput"></pre>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
