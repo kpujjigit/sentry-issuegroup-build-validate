@@ -5,7 +5,9 @@ This repository contains a small static web application that helps you create an
 1. **Rule Builder** – interactively add matchers and expressions to compose a fingerprint rule. The builder outputs a valid rule string that you can copy into your Sentry project settings.
 2. **Rule Validator** – paste one or many fingerprint rules and the validator will highlight each line in green (valid), red (invalid) or yellow (potential improvements). Hover over a rule to see a short explanation or suggestion.
 
-The implementation is completely client‑side and requires no build step. Open `index.html` in a browser to use it.
+The application is served via a small Node.js server that loads Sentry configuration
+from a `.env` file. The server also exposes a `config.js` endpoint consumed by the
+client to initialize Sentry.
 
 ## Running Locally
 
@@ -14,9 +16,11 @@ The implementation is completely client‑side and requires no build step. Open 
    git clone <repo-url>
    cd sentry-issuegroup-build-validate
    ```
-2. Start a local server (optional but avoids browser security restrictions):
+2. Copy `.env.example` to `.env` and fill in your Sentry details.
+3. Install dependencies and start the Node.js server:
    ```bash
-   python3 -m http.server
+   npm install
+   node server.js
    ```
-3. Open `index.html` in your browser. If using the server above, visit `http://localhost:8000/`.
+4. Open `http://localhost:3000` in your browser.
 

@@ -1,3 +1,19 @@
+// Initialize Sentry for error monitoring, performance tracking, profiling and session replay
+Sentry.init({
+  dsn: window.SENTRY_DSN,
+  org: window.SENTRY_ORG,
+  project: window.SENTRY_PROJECT,
+  integrations: [
+    new Sentry.BrowserTracing({ tracePropagationTargets: ["localhost"] }),
+    new Sentry.Replay(),
+    new Sentry.ProfilingIntegration(),
+  ],
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0,
+  replaysSessionSampleRate: 1.0,
+  replaysOnErrorSampleRate: 1.0,
+});
+
 const matcherOptions = [
   'error.type','error.value','message','logger','level',
   'tags.tag','stack.abs_path','stack.module','stack.function','stack.package',
@@ -19,6 +35,7 @@ document.getElementById('addMatcher').onclick = addMatcherRow;
 addMatcherRow();
 
 function buildRule(e) {
+  const span = Sentry.startSpan({ op: 'function', description: 'buildRule' });
   e.preventDefault();
   const matchers = [];
   document.querySelectorAll('.matcherRow').forEach(row => {
@@ -32,6 +49,7 @@ function buildRule(e) {
   if(fingerprint) line += ` -> ${fingerprint}`;
   if(ruleName) line = `# ${ruleName}\n` + line;
   document.getElementById('builtRule').textContent = line;
+  span.finish();
 }
 
 document.getElementById('builderForm').addEventListener('submit', buildRule);
@@ -82,6 +100,7 @@ function validateRule(line) {
 }
 
 function runValidation() {
+  const span = Sentry.startSpan({ op: 'function', description: 'runValidation' });
   const input = document.getElementById('rulesInput').value.split(/\n+/);
   const out = document.getElementById('validationOutput');
   out.innerHTML='';
@@ -96,5 +115,6 @@ function runValidation() {
     div.title=res.status==='valid'?res.explanation:res.message;
     out.appendChild(div);
   });
+  span.finish();
 }
 
